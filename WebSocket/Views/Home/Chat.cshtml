@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Mvc;
+@{
+    ViewData["Title"] = "Chat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject ChatManager ChatManager
+
+<div class="row top-space">
+    <div class="col-lg-12">
+        <ul id="messages" style="max-height:500px; overflow:auto">
+            @{
+                var room = Context.Request.Query["room"].ToString();
+                var username = Context.Request.Query["username"].ToString();
+            }
+            @foreach (var item in ChatManager.Messages)
+            {
+                if (item.room == room)
+                {
+                    if (username == item.username)
+                    {
+                        <div class="alert alert-primary text-right" role="alert">@item.username said: @item.message</div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" role="alert">@item.username said: @item.message</div>
+                    }
+                    username = item.username;
+                }
+
+            }
+        </ul>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="message-content" placeholder="type here" aria-label="type here" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="btn-send">Send</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script data-main="scripts/main" src="https://rawgit.com/radu-matei/websocket-manager/master/src/WebSocketManager.Client.TS/dist/WebSocketManager.js"></script>
+    <script src="~/js/websocket.js" asp-append-version="true"></script>
+}
