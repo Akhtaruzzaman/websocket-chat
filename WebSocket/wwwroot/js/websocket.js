@@ -3,7 +3,7 @@
         window.location.href = "/";
     }
     else {
-        var connection = new WebSocketManager.Connection("wss://localhost:5001/chat");
+        var connection = new WebSocketManager.Connection("wss://raju-chatapp.azurewebsites.net//chat");
         connection.enableLogging = true;
 
         connection.connectionMethods.onConnected = () => {
