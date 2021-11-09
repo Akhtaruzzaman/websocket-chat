@@ -32,6 +32,14 @@ namespace WebSocket.Controllers
         {
             return View();
         }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult ContactList()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
